@@ -1,6 +1,6 @@
 import React from 'react'
 import Dropdown from 'react-bootstrap/Dropdown'
-import { useState } from 'react'
+
 const Cart = (props) =>{
     // const [precio,setPrecio] = useState(0)
     // const updatePrice = () =>{
@@ -9,7 +9,7 @@ const Cart = (props) =>{
     // }
 const ItemLister = () =>{
     return props.items.map((e)=>
-    <Dropdown.Item> {e.name} {e.price} <img src={e.img} style={{width:'50px'}} />x{e.qty}</Dropdown.Item>
+    <Dropdown.Item> {e.name} {e.price} <img src={e.img} style={{width:'50px'}} alt={e.name}/>x{e.qty}</Dropdown.Item>
     
     )
      }
@@ -17,7 +17,7 @@ const ItemLister = () =>{
     return(
         <div>
             <Dropdown autoClose={false}>
-                <Dropdown.Toggle  variant="success" id="dropdown-basic">
+                <Dropdown.Toggle variant="secondary" id="dropdown-basic">
                     <i className="fas fa-shopping-cart" 
                     style={{fontSize: '1.5em'}}></i>
                         <i style={{ 

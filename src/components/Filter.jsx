@@ -11,19 +11,24 @@ const Filter = ({products, filteredItems}) =>{
       // return document.querySelector('.maxPrice').value
     }
     const results = () =>{
-      if(getValues().name!==''){
-        console.log(products.filter(e=>e.name.includes(getValues().name)))
-          return filteredItems(products.filter(e=>e.name.includes(getValues().name)))
+      var filtered = products
+      // if(getValues().name!==''){
+      //   console.log(products.filter(e=>e.name.includes(getValues().name)))
+      //     return filteredItems(products.filter(e=>e.name.includes(getValues().name)))
+      // }
+      
+      if(getValues().min!==''){
+        filtered = products.filter(e=>(e.price>=getValues().min ))
       }
-      else{
-      if(getValues().min==='' && getValues().max!==''){
-        return products.filter(e=>(e.price<=getValues().max ))
+      if(getValues().max!==''){
+        filtered = products.filter(e=>(e.price<=getValues().max ))
       }
-      else if(getValues().min!=='' && getValues().max===''){ 
-        return products.filter(e=>(e.price>=getValues().min ))
-      }else{
-        return filteredItems(products.filter(e=>(e.price>=getValues().min && e.price<=getValues().max)))
-      }}
+      return filteredItems(filtered)
+      // else if(getValues().min!=='' && getValues().max===''){ 
+      //   return products.filter(e=>(e.price>=getValues().min ))
+      // }else{
+      //   return filteredItems(products.filter(e=>(e.price>=getValues().min && e.price<=getValues().max)))
+      // }
       
 
     }

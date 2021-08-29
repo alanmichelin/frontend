@@ -6,12 +6,11 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import { useState,  } from 'react';
 import Cart from './components/Cart'
-import products from './components/items.jsx';
 import Filter from './components/Filter'
 import Notification from './components/notification'
 import ItemDescription from './components/ItemDescription'
 import Categories from './components/Categories'
-// import fetchData from "./components/fetchData"
+import fetchData from "./components/fetchData"
 var counter = {quantity:0,price:0};
 function App() {
   
@@ -39,34 +38,64 @@ function App() {
         }
 
   }
+  console.log(items.length)
+//   const fetchData = async (params) =>{
 
-  const fetchData = async (params) =>{
+//     const gettingData = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?${params}`)
+//     const res = await gettingData.json()
 
-    const gettingData = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?${params}`)
-    const res = await gettingData.json()
+//     const meals = []
+//     res.meals.forEach(e=>{
+//       meals.push({name: e.strMeal, price: Math.floor(Math.random() * 1000) + 10, img: e.strMealThumb})
+//     })
+//     setItems(meals)
+// }
+    const getSpecificMeal= async (props) =>{
 
+      
     const meals = []
-    res.meals.forEach(e=>{
+    var data = await fetchData(props)
+    // console.log(data)
+    data.meals.forEach(e=>{
       meals.push({name: e.strMeal, price: Math.floor(Math.random() * 1000) + 10, img: e.strMealThumb})
     })
     setItems(meals)
-}
+    }
 
+    
 
 
     const filteredItems = (filtered)=>{
       setItems(filtered)
     }
-  
-  const callModal = (props) =>{
-    // console.log(props)
+  const getItemDescription = async (props) =>{
+    var data = await fetchData(props)
+    var item = await data.meals[0]
+    
+    console.log(item)
+      var getIngredients = Object.keys(item).filter(e=> e.includes('strIngredient'))
+      var getMeasures = Object.keys(item).filter(e=> e.includes('strMeasure'))
+
+      var fullRecipe = []
+      for(var i =0; i<getIngredients.length;i++){
+        if(item[getIngredients[i]]!=='' && item[getIngredients[i]]!=null){
+          fullRecipe.push({ [item[getIngredients[i]]] : item[getMeasures[i]] })
+        }
+      }
+
+
+    var desc = {name: item.strMeal, img: item.strMealThumb, desc: item.strInstructions, recipe: fullRecipe}
+    setDescription(desc)
+    callModal()
+  }
+  const callModal = () =>{
     setModalVisibility(!modalVisiblity)
-    setDescription(props)
+    
   }
   const Items = () =>{
     return items.map(e=>
       <Col>
-      <Item agregar={agregarItem} details={callModal} name={e.name} price={e.price} img={e.img}/>
+      <Item agregar={agregarItem} details={getItemDescription} name={e.name} price={e.price} img={e.img}/>
       </Col>
       )
   }
@@ -84,18 +113,35 @@ function App() {
 
       <Col className="justify-content-md-center" >
         <br/>
-      <Filter products={items} filteredItems={filteredItems}/>
-      </Col>
-      {/* <Categories selectCategory={()=>{setItems(fetchData)}}/> */}
-      <Categories selectCategory={fetchData}/>
-      </Row>
-      </Row>
-      {notification.state ? <Notification name={notification.name}/> : <div/>}
-      <Row>
      
-      <Items/>
+      </Col>
+
+      
+      </Row>
+      </Row>
+
+      {notification.state ? <Notification  name={notification.name}/> : <div/>}
+
+      <Row>
+      {items.length===0 ? 
+      <div>
+      <i style={{fontSize:'5em'}}class="fas fa-exclamation-triangle"></i>
+      <h1>Nothing to show here :(</h1>
+      <h2>Choose a category to start displaying items</h2>
+      </div> :<Items/>}
       </Row>
       
+    </Container>
+    
+    <Container >
+    
+    <Col xs lg="1" fluid style={{ position: 'fixed', top:'20%', left:'5%'}}>
+    <Filter products={items} filteredItems={filteredItems}/>
+    
+    <Categories  selectCategory={getSpecificMeal}/>
+    
+
+    </Col>
     </Container>
     </div> 
   );

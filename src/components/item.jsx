@@ -12,7 +12,7 @@ const Item = (props) =>{
     
     return(
         <div  >
-        <Card style={{ width: '200px', marginTop:'25px'}}>
+        <Card style={{ width: '200px', marginTop:'25px', backgroundColor:'#6c757d', border:"2px solid #ced4da", color: "#ced4da"}}>
             <div className="imgdisplay">
             <Card.Img variant="top" src={props.img} className='imagen' />
             </div>
@@ -25,10 +25,15 @@ const Item = (props) =>{
                 
                 <Row>
                 <Col>
-                <Button variant="outline-dark"  onClick={()=>{props.agregar({name: props.name, price: props.price, img: props.img, qty: 1})}}>Comprar</Button>
+                <Button variant="outline-dark" style={{color:"#ced4da", borderColor:"#ced4da"}} onClick={()=>{props.agregar({name: props.name, price: props.price, img: props.img, qty: 1})}}>Buy</Button>
                 </Col>
                 <Col>
-                <Button variant="outline-dark"  onClick={()=>{props.details({name: props.name, price: props.price, img: props.img})}}>Detalles</Button>
+                {/* <Button variant="outline-dark"  onClick={()=>{props.details({name: props.name, price: props.price, img: props.img})}}>Detalles</Button> */}
+                <Button variant="outline-dark" style={{color:"#ced4da", borderColor:"#ced4da"}} onClick={()=>{
+                    var nameLink = props.name.split(' ').join('%')
+                    console.log(nameLink)
+                    props.details(`https://www.themealdb.com/api/json/v1/1/search.php?s=${nameLink}`)
+                    }}>Details</Button>
                 </Col>
                 </Row>
                 
