@@ -1,11 +1,9 @@
 import React from 'react'
 import Toast from 'react-bootstrap/Toast'
 import ToastContainer from 'react-bootstrap/ToastContainer'
-import { useState } from 'react';
-const Notification =(props) =>{
-    // const [visible,setVisible] = useState(true)
 
-    // setTimeout(()=>{setVisible(false)},1000)
+const Notification =(props) =>{
+
     const NotificationWindow = () =>{
         
         return (<Toast>
