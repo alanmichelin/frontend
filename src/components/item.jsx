@@ -25,7 +25,7 @@ const Item = (props) =>{
                 
                 <Row>
                 <Col>
-                <Button variant="outline-dark" style={{color:"#ced4da", borderColor:"#ced4da"}} onClick={()=>{props.agregar({name: props.name, price: props.price, img: props.img, qty: 1})}}>Buy</Button>
+                <Button variant="outline-dark" style={{color:"#ced4da", borderColor:"#ced4da"}} onClick={()=>{props.agregar({name: props.name, price: props.price, img: props.img, qty: 1})}}>Agregar al carrito</Button>
                 </Col>
                 <Col>
                 {/* <Button variant="outline-dark"  onClick={()=>{props.details({name: props.name, price: props.price, img: props.img})}}>Detalles</Button> */}
@@ -33,7 +33,7 @@ const Item = (props) =>{
                     var nameLink = props.name.split(' ').join('%')
                     console.log(nameLink)
                     props.details(`https://www.themealdb.com/api/json/v1/1/search.php?s=${nameLink}`)
-                    }}>Details</Button>
+                    }}>Detalles</Button>
                 </Col>
                 </Row>
                 

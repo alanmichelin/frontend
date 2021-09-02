@@ -20,3 +20,7 @@ body{
   max-height: 200px;
   max-width: 200px;
 }
+
+.text{
+  color:'white' !important  
+}

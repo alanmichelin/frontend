@@ -20,7 +20,7 @@ const Categories = ({selectCategory}) =>{
     return(
         <div style={{color:"#e2e2e2"}}>
         <Row >
-        <p>Categories:</p>
+        <p>Categorias:</p>
             {data.map((e)=>
             <Button variant="outline-light" size="sm" style={{marginTop:'5px',marginBottom:'5px'}} onClick={()=>{selectCategory(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${e.strCategory}`)}}>{e.strCategory}</Button>
             )

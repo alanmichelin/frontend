@@ -1,4 +1,4 @@
-import Button from 'react-bootstrap/Button'
+
 import Modal from 'react-bootstrap/Modal'
 import Recipe from './recipe';
 import Row from 'react-bootstrap/Row'
@@ -23,19 +23,12 @@ const ItemDescription = ({info, description}) => {
             </Col>
             </Row>
             
-            <h2 style={{textAlign:"left"}}>Recipe:</h2>
+            <h2 style={{textAlign:"left"}}>Receta:</h2>
             <p style={{textAlign:"left"}}>{description.desc}</p>
             
             
           </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={info}>
-              Close
-            </Button>
-            <Button variant="primary" onClick={info}>
-              Save Changes
-            </Button>
-          </Modal.Footer>
+
         </Modal>
       </>
     );

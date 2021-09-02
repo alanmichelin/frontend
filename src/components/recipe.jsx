@@ -10,7 +10,7 @@ const Recipe = ({ingredients}) =>{
       
         return (
           <div style={{position: 'absolute'}}>
-              <p>See ingredients</p>
+              <p>Ver ingredientes</p>
             <Button
               onClick={() => setOpen(!open)}
               aria-controls="example-collapse-text"
@@ -25,8 +25,8 @@ const Recipe = ({ingredients}) =>{
                   <Table striped bordered hover size="sm">
                     <thead>
                         <tr>
-                        <th>Ingredient</th>
-                        <th>Measure</th>
+                        <th>Ingrediente</th>
+                        <th>Cantidad</th>
                         </tr>
                     </thead>
                     <tbody>
